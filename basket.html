@@ -68,7 +68,7 @@
             const checkoutBtn = document.getElementById('checkout-btn');
 
             if (items.length === 0) {
-                container.innerHTML = '<p>Basket хоосон байна.</p>';
+                container.innerHTML = '<p>Your basket is empty.</p>';
                 totalEl.textContent = '';
                 checkoutBtn.style.display = 'none';
                 return;
@@ -101,7 +101,8 @@
         }
 
         function checkout() {
-            alert('Захиалга амжилттай! Баярлалаа 🎉');
+            
+            alert('Order placed successfully! Thank you 🎉');
         }
 
         loadBasket();
