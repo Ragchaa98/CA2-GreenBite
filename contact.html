@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding ensures correct text display -->
+    <meta charset="UTF-8">
+
+    <!-- Viewport enables responsive design on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in browser tab -->
+    <title>GreenBite | Contact Us</title>
+
+    <!-- External CSS controls layout, colours and responsiveness -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Accessibility: allows users to skip navigation -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Header contains navigation used across all pages -->
+    <header class="site-header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo" aria-label="GreenBite home page">GreenBite</a>
+
+            <!-- Navigation menu -->
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a class="active" href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main id="main-content">
+
+        <!-- Page banner introduces the contact page -->
+        <section class="page-banner">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Ask about table bookings, catering or general enquiries.</p>
+            </div>
+        </section>
+
+        <!-- Contact section uses grid layout to align form and contact info side by side -->
+        <section class="section">
+            <div class="container contact-layout">
+                <div>
+                    <h2>Send us a message</h2>
+
+                    <!-- Instructions help guide the user -->
+                    <p> Please complete the form below. </p>
+                    <p> All fields are required before the form can be submitted. </p>
+
+                    <!-- Form uses novalidate so that the custom JavaScript validation can demonstrate the assignment rules clearly. -->
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+
+                            <!-- Input field for user name -->
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
+                            <small class="error-message" id="nameError"></small>
+                        </div>
+
+                        <!-- Full Name input -->
+                        <div class="form-group">
+
+                            <!-- Label improves accessibility and usability -->
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" name="phone" placeholder="9 or 10 digit phone number">
+                            <small class="error-message" id="phoneError"></small>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address">
+                            <small class="error-message" id="emailError"></small>
+                        </div>
+
+                        <!-- Textarea for user message -->
+                        <div class="form-group">
+                            <label for="query">Nature of Query</label>
+                            <textarea id="query" name="query" rows="6" placeholder="Write your message here"></textarea>
+                            <small class="error-message" id="queryError"></small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+                        <p id="formStatus" class="form-status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <!-- Contact details section provides alternative contact methods -->
+                <aside class="contact-box">
+                    <h3>Contact details</h3>
+
+                    <!-- Static business information -->
+                    <p><strong>Phone:</strong> 012345678</p>
+                    <p><strong>Email:</strong> Dorjragchaa Chuluunbaatar@2025336 </p>
+                    <p><strong>Address:</strong> 30-34 Westmoreland St, Dublin 2, D02 HK35</p>
+                    <p><strong>Hours:</strong> Mon - Fri 11:30 - 21:00</p>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer provides navigation and branding -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3>GreenBite</h3>
+                <p>Fresh Asian Kitchen in Dublin.</p>
+                <p>Dorjragchaa Chuluunbaatar - 2025336 </p>
+            </div>
+
+            <!-- Footer links improve usability -->
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript handles form validation logic -->
+    <script src="script.js"></script>
+</body>
+</html>

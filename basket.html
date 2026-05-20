@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenBite | Basket</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">GreenBite</a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a class="active" href="basket.html">🛒 Basket</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-banner">
+            <div class="container">
+                <h1>Your Basket</h1>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div id="basket-items"></div>
+                <h3 id="basket-total"></h3>
+                <button onclick="checkout()" id="checkout-btn" style="display:none">Checkout</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3>GreenBite</h3>
+                <p>Fresh Asian Kitchen in Dublin.</p>
+                <p>Dorjragchaa Chuluunbaatar - 2025336</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function loadBasket() {
+            const res = await fetch('http://localhost:3000/api/basket');
+            const items = await res.json();
+            const container = document.getElementById('basket-items');
+            const totalEl = document.getElementById('basket-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            if (items.length === 0) {
+                container.innerHTML = '<p>Basket хоосон байна.</p>';
+                totalEl.textContent = '';
+                checkoutBtn.style.display = 'none';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = items.map(item => {
+                total += parseFloat(item.price) * item.quantity;
+                return `
+                    <div class="basket-item">
+                        <img src="${item.image}" alt="${item.name}" width="80">
+                        <div>
+                            <h3>${item.name}</h3>
+                            <p>€${item.price}</p>
+                        </div>
+                        <button onclick="removeItem(${item.id})">Remove</button>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.textContent = `Total: €${total.toFixed(2)}`;
+            checkoutBtn.style.display = 'block';
+        }
+
+        async function removeItem(id) {
+            await fetch(`http://localhost:3000/api/basket/${id}`, {
+                method: 'DELETE'
+            });
+            loadBasket();
+        }
+
+        function checkout() {
+            alert('Захиалга амжилттай! Баярлалаа 🎉');
+        }
+
+        loadBasket();
+    </script>
+</body>
+</html>

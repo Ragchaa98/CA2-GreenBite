@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenBite | Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo" aria-label="GreenBite home page">GreenBite</a>
+            <nav aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a class="active" href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="basket.html">🛒 Basket (<span id="basket-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-banner">
+            <div class="container">
+                <h1>Our Menu</h1>
+                <p>Balanced meals, bold flavour and simple prices.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Customer favourites</h2>
+                <div class="menu-grid" id="menu-grid">
+                    <!-- JavaScript-аас динамикаар орно -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3>GreenBite</h3>
+                <p>Fresh Asian Kitchen in Dublin.</p>
+                <p>Dorjragchaa Chuluunbaatar - 2025336</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function loadMenu() {
+            const res = await fetch('http://localhost:3000/api/products');
+            const products = await res.json();
+            const grid = document.getElementById('menu-grid');
+
+            grid.innerHTML = products.map(p => `
+                <article class="menu-card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div class="menu-content">
+                        <h3>${p.name}</h3>
+                        <p>${p.description}</p>
+                        <span class="price">€${p.price}</span>
+                        <button onclick="addToBasket(${p.id})" class="btn-basket">Add to Basket</button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        async function addToBasket(product_id) {
+            await fetch('http://localhost:3000/api/basket', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ product_id })
+            });
+            alert('Basket-д нэмэгдлээ!');
+            updateBasketCount();
+        }
+
+        async function updateBasketCount() {
+            const res = await fetch('http://localhost:3000/api/basket');
+            const items = await res.json();
+            document.getElementById('basket-count').textContent = items.length;
+        }
+
+        loadMenu();
+        updateBasketCount();
+    </script>
+</body>
+</html>
