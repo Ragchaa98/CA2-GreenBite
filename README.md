@@ -2,3 +2,4 @@
 Student: Dorjragchaa Chuluunbaatar - 2025336
 Tech stack: HTML, CSS, JavaScript, Node.js, MySQL
 Features: Menu, Basket, Checkout
+Course: Web Development - CCT College Dublin
