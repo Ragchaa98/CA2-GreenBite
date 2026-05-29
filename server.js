@@ -17,10 +17,12 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error('Database холбогдсонгүй:', err);
+    
+    console.error('Database connection failed:', err);
     return;
   }
-  console.log('Database холбогдлоо!');
+  
+  console.log('Database connected!');
 });
 
 app.get('/api/products', (req, res) => {
@@ -53,5 +55,6 @@ app.delete('/api/basket/:id', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Server ажиллаж байна: http://localhost:3000');
+  
+  console.log('Server running at: http://localhost:3000');
 });
